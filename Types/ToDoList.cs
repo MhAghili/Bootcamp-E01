@@ -1,4 +1,5 @@
-﻿
+﻿using System.Text.Json;
+
 namespace Testpr.Types;
 
 
@@ -6,6 +7,19 @@ namespace Testpr.Types;
 class ToDoList
 {
     public List<Task> tasks { get; set; } = new();
+
+    public void AddJsonTask(string jsonContent)
+    {
+        var jsonTasks = JsonSerializer.Deserialize<List<JsonTask>>(jsonContent);
+        if (jsonTasks != null)
+        {
+            foreach (var jsonTask in jsonTasks)
+            {
+                var task = new Task(jsonTask.Title, jsonTask.Description, jsonTask.DueDate, jsonTask.CompletedDate, jsonTask.Priority);
+                AddTask(task);
+            }
+        }
+    }
 
     public void AddTask(Task task)
     {

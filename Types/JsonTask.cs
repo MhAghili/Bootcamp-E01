@@ -9,6 +9,8 @@ class JsonTask
     public string Description { get; set; } = "";
     public DateTime DueDate { get; set; }
 
+    public DateTime? CompletedDate { get; set; }
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public TaskPriority Priority { get; set; }
 
